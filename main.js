@@ -10,39 +10,64 @@ let trabajo = parseInt(
     "Selleccione la opcion deseada. 1 - Colocacion de ceramicas. 2 - Armado de techo. 3 - Construccion desde cero."
   )
 );
-fichaPersonal.push(nombre, apellido, edad, anio, localidad, direccion);
+
+while (
+  !nombre ||
+  !apellido ||
+  !edad ||
+  !anio ||
+  !localidad ||
+  !direccion ||
+  !trabajo
+) {
+  alert(
+    "Para continuar revise los datos ingresados.Nos eoncontramos con un dato erroneo o sin completar"
+  );
+  nombre = prompt("Ingrese su nombre");
+  apellido = prompt("Ingrese su apellito");
+  edad = parseInt(prompt("Ingrese su edad"));
+  anio = parseInt(prompt("Ingrese su anio de nacimiento"));
+  localidad = prompt("Ingrese su localidad");
+  direccion = prompt("Ingrese su direccion");
+  trabajo = parseInt(
+    prompt(
+      "Selleccione la opcion deseada. 1 - Colocacion de ceramicas. 2 - Armado de techo. 3 - Construccion desde cero."
+    )
+  );
+}
+
+fichaPersonal.push(
+  "Nombre: " + nombre,
+  "Apellido: " + apellido,
+  "Edad: " + edad,
+  "Año: " + anio,
+  "Localidad: " + localidad,
+  "Direccion: " + direccion
+);
 
 const iva = (a, b) => a * b * 0.21;
 
+const calcularMetros = (num) => {
+  let metros = parseInt(prompt("Ingrese totalidad de los metros a construir"));
+  total = metros * num + iva(metros, num);
+  alert("El trabajo vale " + total);
+  fichaPersonal.push("Total presupuestado: " + total);
+  alert("Los datos del presupuesto final son los siguentes " + fichaPersonal);
+};
+
 switch (trabajo) {
   case 1:
-    let metros = parseInt(
-      prompt("Ingrese totalidad de los metros a construir")
-    );
-    total = metros * 1000 + iva(metros, 1000);
-    alert("El trabajo vale " + total);
-    fichaPersonal.push("Total presupuestado: " + total);
-    alert("Los datos del presupuesto final son correctos? " + fichaPersonal);
+    calcularMetros(1000);
     break;
   case 2:
-    let metros1 = parseInt(
-      prompt("Ingrese totalidad de los metros a construir")
-    );
-    total = metros * 1200 + iva(metros1, 1200);
-    alert("El trabajo vale " + total);
-    fichaPersonal.push("Total presupuestado: " + total);
-    alert("Los datos del presupuesto final son correctos? " + fichaPersonal);
+    calcularMetros(1200);
     break;
   case 3:
-    let metros2 = parseInt(
-      prompt("Ingrese totalidad de los metros a construir")
-    );
-    total = metros * 3500 + iva(metros2, 3500);
-    alert("El trabajo vale " + total);
-    fichaPersonal.push("Total presupuestado: " + total);
-    alert("Los datos del presupuesto final son correctos? " + fichaPersonal);
+    calcularMetros(3500);
     break;
   default:
     alert("La opcion ingresada es incorrecta");
     break;
 }
+
+fichaPersonal.forEach(fichaPersonal => console.log(fichaPersonal))
